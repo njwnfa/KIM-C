@@ -16,6 +16,39 @@
     <link href="https://fonts.googleapis.com/css2?family=Kanit:ital,wght@0,400;1,400&amp;display=swap" rel="stylesheet" />
     <!-- Core theme CSS (includes Bootstrap)-->
     <link href="css/styles.css" rel="stylesheet" />
+    <style>
+      .team-member {
+        text-align: center;
+        margin-bottom: 30px;
+      }
+      .team-member img {
+        border-radius: 50%;
+        width: 200px;
+        height: 200px;
+        object-fit: cover;
+        object-position: center;
+        transition: transform 0.3s ease-in-out;
+      }
+      .team-member img:hover {
+        transform: scale(1.1);
+      }
+      .team-member .social-icons a {
+        margin: 0 5px;
+        color: #333;
+      }
+      .team-member .social-icons a:hover {
+        color: #007bff;
+      }
+      .about-text {
+        font-size: 1.1rem;
+        line-height: 1.8;
+      }
+      .about-section {
+        background: linear-gradient(to right, #ece9e6, #ffffff);
+        border-radius: 10px;
+        padding: 20px;
+      }
+    </style>
   </head>
   <body id="page-top">
     <!-- Navigation-->
@@ -119,6 +152,7 @@
             <!-- Masthead device mockup feature-->
             <div class="masthead-device-mockup">
               <svg class="circle" viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
+                <img src="assets/img/carbo.jpg" alt="..." class="rounded-circle"
                 <defs>
                   <linearGradient id="circleGradient" gradientTransform="rotate(45)">
                     <stop class="gradient-start-color" offset="0%"></stop>
@@ -145,11 +179,11 @@
       </div>
     </header>
     <!-- Quote/testimonial aside-->
-    <aside class="text-center bg-gradient-primary-to-secondary">
+    <aside style="background-color: #f4c278;">
       <div class="container px-5">
         <div class="row gx-5 justify-content-center">
           <div class="col-xl-10">
-            <div class="h6 fs-3 text-white mb-6">Selamat datang di KIM-C, aplikasi pintar yang dirancang untuk mendukung kesehatan ibu hamil dan ibu menyusui melalui pemantauan asupan karbohidrat Harian</div>
+            <div class="h6 fs-3 text-white mb-6">Selamat datang di KIM-C, aplikasi pintar yang dirancang untuk mendukung kesehatan ibu hamil dan ibu menyusui melalui pemantauan asupan karbohidrat dalam makanan kemasan. Dengan menjaga asupan karbohidrat tetap terkendali, KIM-C membantu mencegah risiko diabetes melitus</div>
           </div>
         </div>
       </div>
@@ -163,11 +197,8 @@
             Apa itu karbohidrat?
           </h2>
           <p class="lead fw-normal text-white mb-5 mb-lg-0">
-            Karbohidrat adalah suatu zat gizi yang sangat dibutuhkan oleh manusia yang berfungsi untuk menghasilkan energi bagi tubuh manusia.
-              Karbohidrat sederhana tersusun dari ikatan gula sederhana yang sangat cepat dicerna oleh tubuh sehingga memberikan pengaruh peningkatan glukosa pada tubuh. 
-              Kebutuhan karbohidrat per hari masing-masing orang berbeda-beda.
+            Karbohidrat adalah suatu zat gizi yang sangat dibutuhkan oleh manusia yang berfungsi untuk menghasilkan energi bagi tubuh manusia. Karbohidrat sederhana tersusun dari ikatan gula sederhana yang sangat cepat dicerna oleh tubuh sehingga memberikan pengaruh peningkatan glukosa pada tubuh. Peningkatan kadar glukosa dalam tubuh dapat menimbulkan resiko penyakit Diabetes Mellitus. Faktor yang mengakibatkan ibu hamil dan menyusui mengalami dibetes melitus salah satunya yaitu karena tingginya konsumsi kadar karbohidrat. 
           </p>
-          <a class="btn btn-outline-light py-3 px-4 rounded-pill" href="https://startbootstrap.com/theme/new-age" target="_blank">Download for free</a>
         </div>
       </div>
     </section>
@@ -227,37 +258,63 @@
     <!-- Basic features section-->
     <section class="bg-light">
       <div class="container px-5">
-        <div class="row gx-5 align-items-center justify-content-center justify-content-lg-between">
-          <div class="col-12 col-lg-5">
+        <div class="row gx-5 align-items-center justify-content-center justify-content-lg-center">
+          <div class="text-center">
             <h2 class="display-4 lh-1 mb-4">Maka dari itu mari cek konsumsi karbohidrat harianmu disini!!</h2>
-            <p class="lead fw-normal text-muted mb-5 mb-lg-0">
-              This section is perfect for featuring some information about your application, why it was built, the problem it solves, or anything else! There's plenty of space for text here, so don't worry about writing too much.
-            </p>
-          </div>
-          <div class="col-sm-8 col-md-6">
-            <div class="px-5 px-sm-0"><img class="img-fluid rounded-circle" src="https://source.unsplash.com/u8Jn2rzYIps/900x900" alt="..." /></div>
+            <button class="btn btn-primary rounded-pill px-5 mb-2 mb-lg-0" data-bs-toggle="modal" data-bs-target="#loginModal">
+              <span class="d-flex align-items-center">
+                <i class="bi-chat-text-fill me-2"></i>
+                <span class="large">Login</span>
+              </span>
+            </button>
           </div>
         </div>
       </div>
     </section>
-    <!-- App badge section-->
-    <section class="bg-gradient-primary-to-secondary" id="download">
-      <div class="container px-5">
-        <h2 class="text-center text-white font-alt mb-4">Get the app now!</h2>
-        <div class="d-flex flex-column flex-lg-row align-items-center justify-content-center">
-          <a class="me-lg-3 mb-4 mb-lg-0" href="#!"><img class="app-badge" src="assets/img/google-play-badge.svg" alt="..." /></a>
-          <a href="#!"><img class="app-badge" src="assets/img/app-store-badge.svg" alt="..." /></a>
-        </div>
-      </div>
-    </section> 
+
     <!--nama group-->
-    <section class="bg-gradient-primary-to-secondary">
-      <div class="container px-5">
-        <h2 class="text-center text-white font-alt mb-4">our team</h2>
-        <h5>Aisiyah Haura R</h5>
-        <h5>Atikah Shobrina</h5>
-        <h5>Hari Iskandar</h5>
-        <h5>Nur Farida</h5>
+    <section style="background-color: #f4c278;">
+      <div class="row">
+        <div class="col-md-3 team-member" data-aos="fade-up">
+          <img src="assets/profil/gibran.jpg" alt="Jenny Wilson">
+          <h4 style="padding-top: 15px;">Aisiyah Haura R</h4>
+          <p>Mahasiswa RMIK</p>
+          <div class="social-icons">
+            <a href="#"><i class="fa-brands fa-instagram"></i></a>
+            <a href="#"><i class="fa-brands fa-facebook"></i></a>
+            <a href="#"><i class="fa-brands fa-linkedin"></i></a>
+          </div>
+        </div>
+        <div class="col-md-3 team-member" data-aos="fade-up">
+          <img src="https://64.media.tumblr.com/9a13ecc88b5104893246f683c60a812e/b8f018caf5076b2e-46/s1280x1920/33d8d72a5e04d6f94c10ab6a30c11105c26181e3.jpg" alt="Theresa Bell">
+          <h4 style="padding-top: 15px;">Atikah Shobrina</h4>
+          <p>Mahasiswa RMIK</p>
+          <div class="social-icons">
+            <a href="#"><i class="fa-brands fa-instagram"></i></a>
+            <a href="#"><i class="fa-brands fa-facebook"></i></a>
+            <a href="#"><i class="fa-brands fa-linkedin"></i></a>
+          </div>
+        </div>
+        <div class="col-md-3 team-member" data-aos="fade-up">
+          <img src="https://64.media.tumblr.com/9a13ecc88b5104893246f683c60a812e/b8f018caf5076b2e-46/s1280x1920/33d8d72a5e04d6f94c10ab6a30c11105c26181e3.jpg" alt="Darrell Steward">
+          <h4 style="padding-top: 15px;">Hari Iskandar</h4>
+          <p>Mahasiswa RMIK</p>
+          <div class="social-icons">
+            <a href="#"><i class="fa-brands fa-instagram"></i></a>
+            <a href="#"><i class="fa-brands fa-facebook"></i></a>
+            <a href="#"><i class="fa-brands fa-linkedin"></i></a>
+          </div>
+        </div>
+        <div class="col-md-3 team-member" data-aos="fade-up">
+          <img src="https://64.media.tumblr.com/9a13ecc88b5104893246f683c60a812e/b8f018caf5076b2e-46/s1280x1920/33d8d72a5e04d6f94c10ab6a30c11105c26181e3.jpg" alt="Fiony Alveria">
+          <h4 style="padding-top: 15px;">Najwa Medina Z.A.F</h4>
+          <p>Mahasiswa RMIK</p>
+          <div class="social-icons">
+            <a href="#"><i class="fa-brands fa-instagram"></i></a>
+            <a href="#"><i class="fa-brands fa-facebook"></i></a>
+            <a href="#"><i class="fa-brands fa-linkedin"></i></a>
+          </div>
+        </div>
       </div>
     </section>
     <!-- Footer-->
