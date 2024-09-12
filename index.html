@@ -49,6 +49,39 @@
         padding: 20px;
       }
     </style>
+     <style>
+      .team-member {
+        text-align: center;
+        margin-bottom: 30px;
+      }
+      .team-member img {
+        border-radius: 50%;
+        width: 200px;
+        height: 200px;
+        object-fit: cover;
+        object-position: center;
+        transition: transform 0.3s ease-in-out;
+      }
+      .team-member img:hover {
+        transform: scale(1.1);
+      }
+      .team-member .social-icons a {
+        margin: 0 5px;
+        color: #333;
+      }
+      .team-member .social-icons a:hover {
+        color: #007bff;
+      }
+      .about-text {
+        font-size: 1.1rem;
+        line-height: 1.8;
+      }
+      .about-section {
+        background: linear-gradient(to right, #ece9e6, #ffffff);
+        border-radius: 10px;
+        padding: 20px;
+      }
+    </style>
   </head>
   <body id="page-top">
     <!-- Navigation-->
@@ -289,12 +322,57 @@
           </div>
         </div>
       </div>
+      <section style="background-color: #f4c278;">
+        <div class="row">
+          <div class="col-md-3 team-member" data-aos="fade-up">
+            <img src="assets/profil/gibran.jpg" alt="Jenny Wilson">
+            <h4 style="padding-top: 15px;">Nazwa Adzraa Labiqa</h4>
+            <p>Mahasiswa RMIK</p>
+            <div class="social-icons">
+              <a href="#"><i class="fa-brands fa-instagram"></i></a>
+              <a href="#"><i class="fa-brands fa-facebook"></i></a>
+              <a href="#"><i class="fa-brands fa-linkedin"></i></a>
+            </div>
+          </div>
+          <div class="col-md-3 team-member" data-aos="fade-up">
+            <img src="https://64.media.tumblr.com/9a13ecc88b5104893246f683c60a812e/b8f018caf5076b2e-46/s1280x1920/33d8d72a5e04d6f94c10ab6a30c11105c26181e3.jpg" alt="Theresa Bell">
+            <h4 style="padding-top: 15px;">Nur Farida Laila</h4>
+            <p>Mahasiswa RMIK</p>
+            <div class="social-icons">
+              <a href="#"><i class="fa-brands fa-instagram"></i></a>
+              <a href="#"><i class="fa-brands fa-facebook"></i></a>
+              <a href="#"><i class="fa-brands fa-linkedin"></i></a>
+            </div>
+          </div>
+          <div class="col-md-3 team-member" data-aos="fade-up">
+            <img src="https://64.media.tumblr.com/9a13ecc88b5104893246f683c60a812e/b8f018caf5076b2e-46/s1280x1920/33d8d72a5e04d6f94c10ab6a30c11105c26181e3.jpg" alt="Darrell Steward">
+            <h4 style="padding-top: 15px;">Revita Wulandari</h4>
+            <p>Mahasiswa RMIK</p>
+            <div class="social-icons">
+              <a href="#"><i class="fa-brands fa-instagram"></i></a>
+              <a href="#"><i class="fa-brands fa-facebook"></i></a>
+              <a href="#"><i class="fa-brands fa-linkedin"></i></a>
+            </div>
+          </div>
+          <div class="col-md-3 team-member" data-aos="fade-up">
+            <img src="https://64.media.tumblr.com/9a13ecc88b5104893246f683c60a812e/b8f018caf5076b2e-46/s1280x1920/33d8d72a5e04d6f94c10ab6a30c11105c26181e3.jpg" alt="Fiony Alveria">
+            <h4 style="padding-top: 15px;">Santi Prihantini</h4>
+            <p>Mahasiswa RMIK</p>
+            <div class="social-icons">
+              <a href="#"><i class="fa-brands fa-instagram"></i></a>
+              <a href="#"><i class="fa-brands fa-facebook"></i></a>
+              <a href="#"><i class="fa-brands fa-linkedin"></i></a>
+            </div>
+          </div>
+        </div>
+      </div>
     </section>
     </header>
     <!-- Footer-->
-    <footer class="bg-black text-center py-5">
+    <aside style="background-color: #ffc670;">
+    <footer class="text-center py-5">
       <div class="container px-5">
-        <div class="text-white-50 small">
+        <div class="text-black-100 small">
           <div class="mb-2">&copy; Your Website 2024. All Rights Reserved.</div>
           <a href="#!">Privacy</a>
           <span class="mx-1">&middot;</span>
@@ -304,6 +382,7 @@
         </div>
       </div>
     </footer>
+    </aside>
     <!-- Feedback Modal-->
     <div class="modal fade" id="feedbackModal" tabindex="-1" aria-labelledby="feedbackModalLabel" aria-hidden="true">
       <div class="modal-dialog modal-dialog-centered">
