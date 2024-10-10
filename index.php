@@ -49,65 +49,56 @@
         padding: 20px;
       }
     </style>
-     <style>
-      .team-member {
-        text-align: center;
-        margin-bottom: 30px;
-      }
-      .team-member img {
-        border-radius: 50%;
-        width: 200px;
-        height: 200px;
-        object-fit: cover;
-        object-position: center;
-        transition: transform 0.3s ease-in-out;
-      }
-      .team-member img:hover {
-        transform: scale(1.1);
-      }
-      .team-member .social-icons a {
-        margin: 0 5px;
-        color: #333;
-      }
-      .team-member .social-icons a:hover {
-        color: #007bff;
-      }
-      .about-text {
-        font-size: 1.1rem;
-        line-height: 1.8;
-      }
-      .about-section {
-        background: linear-gradient(to right, #ece9e6, #ffffff);
-        border-radius: 10px;
-        padding: 20px;
-      }
-    </style>
   </head>
   <body id="page-top">
     <!-- Navigation-->
-    <nav class="navbar navbar-expand-lg navbar-light fixed-top shadow-sm" id="mainNav" style="background-color: #ffc670;">
-      <div class="container px-5">
-        <img src="/assets/img/737.jpg" alt="" style="width: 35px; margin-right: 10px" />
-        <a class="navbar-brand fw-bold" href="#page-top">KIM-C.</a>
+    <?php
+    session_start();
+    ?>
+
+<nav class="navbar navbar-expand-lg navbar-light fixed-top shadow-sm" id="mainNav" style="background-color: #ffc670;">
+    <div class="container px-5">
+        <img src="assets/img/737.jpg" alt="" style="width: 35px; margin-right: 10px" />
+        <a class="navbar-brand fw-bold" href="#page-top">KIM-C</a>
         <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
-          Menu
-          <i class="bi-list"></i>
+            <i class="bi-list"></i>
         </button>
         <div class="collapse navbar-collapse" id="navbarResponsive">
-          <ul class="navbar-nav ms-auto me-4 my-3 my-lg-0">
-            <li class="nav-item"><a class="nav-link me-lg" href="#home">Home</a></li>
-            <li class="nav-item"><a class="nav-link me-lg" href="#features">Features</a></li>
-            <li class="nav-item"><a class="nav-link me-lg-3" href="#download">About Us</a></li>
-          </ul>
-          <button class="btn btn-primary rounded-pill px-3 mb-2 mb-lg-0" data-bs-toggle="modal" data-bs-target="#loginModal">
-            <span class="d-flex align-items-center">
-              <i class="bi-chat-text-fill me-2"></i>
-              <span class="small">Login</span>
-            </span>
-          </button>
+            <ul class="navbar-nav ms-auto me-4 my-3 my-lg-0">
+                <li class="nav-item"><a class="nav-link me-lg" href="#home">Home</a></li>
+                <li class="nav-item"><a class="nav-link me-lg" href="#features">Features</a></li>
+                <li class="nav-item"><a class="nav-link me-lg" href="#about_us">About Us</a></li>
+                
+                <!-- Tambahkan Menu Cek Karbohidrat jika user login -->
+                <?php if (isset($_SESSION['user_id'])): ?>
+                    <li class="nav-item"><a class="nav-link me-lg" href="cek-karbo/index.php">Cek Karbohidrat</a></li>
+                <?php endif; ?>
+            </ul>
+
+            <!-- Ganti button login menjadi profile jika user login -->
+            <?php if (isset($_SESSION['user_id'])): ?>
+            <div class="dropdown">
+                <button class="btn dropdown-toggle" type="button" id="profileDropdown" data-bs-toggle="dropdown" aria-expanded="false">
+                    <img src="assets/img/profile.png" alt="Profile" style="width: 35px; height: 35px; border-radius: 50%;" />
+                </button>
+                <ul class="dropdown-menu" aria-labelledby="profileDropdown">
+                    <li><a class="dropdown-item" href="#">Hello, <?php echo $_SESSION['user_name']; ?></a></li>
+                    <li><hr class="dropdown-divider"></li>
+                    <li><a class="dropdown-item" href="logout/logout.php">Logout</a></li> 
+                </ul>
+            </div>
+            <?php else: ?>
+            <button class="btn btn-primary rounded-pill px-3 mb-2 mb-lg-0" data-bs-toggle="modal" data-bs-target="#loginModal">
+                <span class="d-flex align-items-center">
+                    <i class="bi-chat-text-fill me-2"></i>
+                    <span class="small">Login</span>
+                </span>
+            </button>
+            <?php endif; ?>
         </div>
-      </div>
-    </nav>
+    </div>
+</nav>
+
 
     <!-- Login Modal -->
     <div class="modal fade" id="loginModal" tabindex="-1" aria-labelledby="loginModalLabel" aria-hidden="true">
@@ -118,7 +109,7 @@
             <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
           </div>
           <div class="modal-body">
-            <form action="login.php" method="post">
+            <form action="login/login.php" method="post">
               <div class="mb-3">
                 <label for="loginEmail" class="form-label">Email address</label>
                 <input type="email" class="form-control" id="loginEmail" name="email" required />
@@ -146,10 +137,14 @@
             <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
           </div>
           <div class="modal-body">
-            <form action="signup.php" method="post">
+            <form action="register/signup.php" method="post">
               <div class="mb-3">
                 <label for="signupEmail" class="form-label">Email address</label>
                 <input type="email" class="form-control" id="signupEmail" name="email" required />
+              </div>
+              <div class="mb-3">
+                <label for="signupName" class="form-label">Name</label>
+                <input type="text" class="form-control" id="signupName" name="name" required />
               </div>
               <div class="mb-3">
                 <label for="signupPassword" class="form-label">Password</label>
@@ -178,8 +173,6 @@
                 Selamat datang di KIM-C, aplikasi pintar yang dirancang untuk mendukung kesehatan ibu hamil dan ibu menyusui melalui pemantauan asupan karbohidrat dalam makanan kemasan. Dengan menjaga asupan karbohidrat tetap terkendali, KIM-C membantu mencegah risiko diabetes melitus.
               </p>
               <div class="d-flex flex-column flex-lg-row align-items-center">
-                <!-- <a class="me-lg-3 mb-4 mb-lg-0" href="#!"><img class="app-badge" src="assets/img/google-play-badge.svg" alt="..." /></a>
-                <a href="#!"><img class="app-badge" src="assets/img/app-store-badge.svg" alt="..." /></a> -->
               </div>
             </div>
           </div>
@@ -187,22 +180,16 @@
             <!-- Masthead device mockup feature-->
             <div class="masthead-device-mockup">
               <svg class="circle" viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
-                <img src="assets/img/carbo.jpg" alt="..." class="rounded-circle"
+                <img src="assets/img/carbo.jpg" alt="..." class="rounded-circle">
                 <defs>
                   <linearGradient id="circleGradient" gradientTransform="rotate(45)">
                     <stop class="gradient-start-color" offset="0%"></stop>
                     <stop class="gradient-end-color" offset="100%"></stop>
                   </linearGradient>
                 </defs>
-                <circle cx="50" cy="50" r="50"></circle></svg
+                <circle cx="50" cy="50" r="50"></circle></svg>
                 <rect x="-32.54" y="78.39" width="305.92" height="84.05" rx="42.03" transform="translate(120.42 -49.88) rotate(45)"></rect>
-                <rect x="-32.54" y="78.39" width="305.92" height="84.05" rx="42.03" transform="translate(-49.88 120.42) rotate(-45)"></rect></svg  
-              <div class="device-wrapper">
-                    <!-- PUT CONTENTS HERE:-->
-                    <!-- * * This can be a video, image, or just about anything else.-->
-                    <!-- * * Set the max width of your media to 100% and the height to-->
-                    <!-- * * 100% like the demo example below.-->
-              </div>
+                <rect x="-32.54" y="78.39" width="305.92" height="84.05" rx="42.03" transform="translate(-49.88 120.42) rotate(-45)"></rect></svg>
                 </div>
               </div>
             </div>
@@ -227,7 +214,7 @@
       </div>
     </aside>
     <!-- Karbohidrat terhadap DM-->
-      <aside style="background-color: #ffffff;">
+      <aside style="background-color: #f8f9fa;">
       <div class="cta-content">
         <div class="container px-5">
          <div class="row gx-5 justify-content-center">
@@ -278,11 +265,11 @@
     </section>
     </header>
     <!--nama group-->
-    <header class="masthead" id="about us">
+    <header class="masthead" id="about_us">
     <section style="background-color: #f4c278;">
       <div class="row">
         <div class="col-md-3 team-member" data-aos="fade-up">
-          <img src="assets/profil/gibran.jpg" alt="Jenny Wilson">
+          <img src="https://64.media.tumblr.com/9a13ecc88b5104893246f683c60a812e/b8f018caf5076b2e-46/s1280x1920/33d8d72a5e04d6f94c10ab6a30c11105c26181e3.jpg" alt="Jenny Wilson">
           <h4 style="padding-top: 15px;">Aisiyah Haura R</h4>
           <p>Mahasiswa RMIK</p>
           <div class="social-icons">
@@ -325,7 +312,7 @@
       <section style="background-color: #f4c278;">
         <div class="row">
           <div class="col-md-3 team-member" data-aos="fade-up">
-            <img src="assets/profil/gibran.jpg" alt="Jenny Wilson">
+            <img src="https://64.media.tumblr.com/9a13ecc88b5104893246f683c60a812e/b8f018caf5076b2e-46/s1280x1920/33d8d72a5e04d6f94c10ab6a30c11105c26181e3.jpg" alt="Jenny Wilson">
             <h4 style="padding-top: 15px;">Nazwa Adzraa Labiqa</h4>
             <p>Mahasiswa RMIK</p>
             <div class="social-icons">
@@ -369,86 +356,20 @@
     </section>
     </header>
     <!-- Footer-->
-    <aside style="background-color: #ffc670;">
+    <aside style="background-color: #f8f9fa;">
     <footer class="text-center py-5">
       <div class="container px-5">
         <div class="text-black-100 small">
           <div class="mb-2">&copy; Your Website 2024. All Rights Reserved.</div>
-          <a href="#!">Privacy</a>
+          <a class="text-black" href="#!">Privacy</a>
           <span class="mx-1">&middot;</span>
-          <a href="#!">Terms</a>
+          <a class="text-black" href="#!">Terms</a>
           <span class="mx-1">&middot;</span>
-          <a href="#!">FAQ</a>
+          <a class="text-black" href="#!">FAQ</a>
         </div>
       </div>
     </footer>
     </aside>
-    <!-- Feedback Modal-->
-    <div class="modal fade" id="feedbackModal" tabindex="-1" aria-labelledby="feedbackModalLabel" aria-hidden="true">
-      <div class="modal-dialog modal-dialog-centered">
-        <div class="modal-content">
-          <div class="modal-header bg-gradient-primary-to-secondary p-4">
-            <h5 class="modal-title font-alt text-white" id="feedbackModalLabel">Send feedback</h5>
-            <button class="btn-close btn-close-white" type="button" data-bs-dismiss="modal" aria-label="Close"></button>
-          </div>
-          <div class="modal-body border-0 p-4">
-            <!-- * * * * * * * * * * * * * * *-->
-            <!-- * * SB Forms Contact Form * *-->
-            <!-- * * * * * * * * * * * * * * *-->
-            <!-- This form is pre-integrated with SB Forms.-->
-            <!-- To make this form functional, sign up at-->
-            <!-- https://startbootstrap.com/solution/contact-forms-->
-            <!-- to get an API token!-->
-            <form id="contactForm" data-sb-form-api-token="API_TOKEN">
-              <!-- Name input-->
-              <div class="form-floating mb-3">
-                <input class="form-control" id="name" type="text" placeholder="Enter your name..." data-sb-validations="required" />
-                <label for="name">Full name</label>
-                <div class="invalid-feedback" data-sb-feedback="name:required">A name is required.</div>
-              </div>
-              <!-- Email address input-->
-              <div class="form-floating mb-3">
-                <input class="form-control" id="email" type="email" placeholder="name@example.com" data-sb-validations="required,email" />
-                <label for="email">Email address</label>
-                <div class="invalid-feedback" data-sb-feedback="email:required">An email is required.</div>
-                <div class="invalid-feedback" data-sb-feedback="email:email">Email is not valid.</div>
-              </div>
-              <!-- Phone number input-->
-              <div class="form-floating mb-3">
-                <input class="form-control" id="phone" type="tel" placeholder="(123) 456-7890" data-sb-validations="required" />
-                <label for="phone">Phone number</label>
-                <div class="invalid-feedback" data-sb-feedback="phone:required">A phone number is required.</div>
-              </div>
-              <!-- Message input-->
-              <div class="form-floating mb-3">
-                <textarea class="form-control" id="message" type="text" placeholder="Enter your message here..." style="height: 10rem" data-sb-validations="required"></textarea>
-                <label for="message">Message</label>
-                <div class="invalid-feedback" data-sb-feedback="message:required">A message is required.</div>
-              </div>
-              <!-- Submit success message-->
-              <!---->
-              <!-- This is what your users will see when the form-->
-              <!-- has successfully submitted-->
-              <div class="d-none" id="submitSuccessMessage">
-                <div class="text-center mb-3">
-                  <div class="fw-bolder">Form submission successful!</div>
-                  To activate this form, sign up at
-                  <br />
-                  <a href="https://startbootstrap.com/solution/contact-forms">https://startbootstrap.com/solution/contact-forms</a>
-                </div>
-              </div>
-              <!-- Submit error message-->
-              <!---->
-              <!-- This is what your users will see when there is-->
-              <!-- an error submitting the form-->
-              <div class="d-none" id="submitErrorMessage"><div class="text-center text-danger mb-3">Error sending message!</div></div>
-              <!-- Submit Button-->
-              <div class="d-grid"><button class="btn btn-primary rounded-pill btn-lg disabled" id="submitButton" type="submit">Submit</button></div>
-            </form>
-          </div>
-        </div>
-      </div>
-    </div>
     <!-- Bootstrap core JS-->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"></script>
     <!-- Core theme JS-->

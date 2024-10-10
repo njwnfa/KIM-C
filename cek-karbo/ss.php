@@ -1,4 +1,5 @@
 <?php
+include '../config/koneksi.php';
 // Tangkap data dari form di dashboard.php
 $nama = $_POST['nama'];
 $umur = $_POST['umur'];
@@ -10,7 +11,6 @@ $status = $_POST['status'];
 $persentase_karbo = 0;
 $kategori = "";
 
-// Proses perhitungan berdasarkan status (hamil atau menyusui)
 if ($status == "hamil") {
     $persentase_karbo = ($jumlah_karbo / 345) * 100;
     $riwayat_keluarga = $_POST['riwayat_keluarga'];
