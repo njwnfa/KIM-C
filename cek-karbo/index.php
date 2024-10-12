@@ -144,7 +144,7 @@ $user_id = isset($_SESSION['user_id']) ? $_SESSION['user_id'] : null;
                     echo "</tr>";
                 }
             } else {
-                echo "<tr><td colspan='8' class='text-center'>Belum ada riwayat perhitungan</td></tr>";
+                echo "<tr><td colspan='9' class='text-center'>Belum ada riwayat perhitungan</td></tr>";
             }
         } else {
             echo "Error executing query.";
