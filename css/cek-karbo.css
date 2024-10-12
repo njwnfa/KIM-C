@@ -1,0 +1,48 @@
+/* form */
+.form-label {
+  font-weight: bold;
+}
+.btn-primary {
+  background-color: #ffc670;
+  border: none;
+  transition: background-color 0.3s;
+  width: 100%;
+}
+.btn-primary:hover {
+  background-color: #ffb84d;
+}
+/* tabel */
+table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-top: 20px;
+}
+
+thead {
+  background-color: #ffc670; /* Warna latar belakang header */
+  color: #fff; /* Warna teks header */
+}
+
+th,
+td {
+  padding: 12px 15px; /* Padding untuk sel */
+  text-align: center; /* Rata tengah teks */
+  border: 1px solid #dee2e6; /* Border sel */
+}
+
+tr {
+  transition: background-color 0.3s ease; /* Transisi untuk efek hover */
+}
+
+tr:hover {
+  background-color: #f1f1f1; /* Warna latar belakang saat hover */
+}
+
+.table-container {
+  overflow-x: auto; /* Scroll horizontal jika tabel terlalu lebar */
+  border-radius: 8px; /* Border radius untuk sudut tabel */
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1); /* Bayangan untuk tabel */
+  background-color: #fff; /* Warna latar belakang tabel */
+  padding: 20px; /* Padding di sekitar tabel */
+  margin-top: 20px; /* Margin atas */
+}

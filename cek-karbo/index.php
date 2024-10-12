@@ -16,11 +16,15 @@
     <link href="https://fonts.googleapis.com/css2?family=Kanit:ital,wght@0,400;1,400&amp;display=swap" rel="stylesheet" />
     <!-- Core theme CSS (includes Bootstrap)-->
     <link href="../css/styles.css" rel="stylesheet" />
+    <link href="../css/cek-karbo.css" rel="stylesheet" />
   </head>
 <body>
 <!-- Navigation-->
 <?php
 session_start();
+include '../config/koneksi.php';
+
+$user_id = isset($_SESSION['user_id']) ? $_SESSION['user_id'] : null;   
 ?>
 
 <nav class="navbar navbar-expand-lg navbar-light fixed-top shadow-sm" id="mainNav" style="background-color: #ffc670;">
@@ -51,7 +55,7 @@ session_start();
                 <ul class="dropdown-menu" aria-labelledby="profileDropdown">
                     <li><a class="dropdown-item" href="#">Hello, <?php echo $_SESSION['user_name']; ?></a></li>
                     <li><hr class="dropdown-divider"></li>
-                    <li><a class="dropdown-item" href="logout.php">Logout</a></li> <!-- Tambahkan Logout -->
+                    <li><a class="dropdown-item" href="../logout/logout.php">Logout</a></li>
                 </ul>
             </div>
             <?php else: ?>
@@ -65,5 +69,110 @@ session_start();
         </div>
     </div>
 </nav>
+<!-- Form untuk menghitung karbohidrat -->
+<div class="container mt-5" style="background-color: #ffffff; border-radius: 10px; box-shadow: 0 0 20px rgba(0, 0, 0, 0.1); padding: 30px; padding-top: 80px; margin-top: 200px;">
+    <h2 class="text-center">Cek Konsumsi Karbohidrat</h2>
+    <form method="POST" action="cek_karbohidrat.php">
+        <div class="mb-3">
+            <label for="condition" class="form-label">Kondisi Ibu</label>
+                <select class="form-control" id="condition" name="condition" required>
+                    <option value="">Pilih Kondisi</option>
+                    <option value="hamil">Hamil</option>
+                    <option value="menyusui">Menyusui</option>
+                </select>
+        </div>
+        <div class="mb-3">
+            <label for="age" class="form-label">Usia</label>
+            <input type="number" class="form-control" id="age" name="age" required>
+        </div>
+        <div class="mb-3">
+            <label for="weight" class="form-label">Berat Badan (kg)</label>
+            <input type="number" class="form-control" id="weight" name="weight" required>
+        </div>
+        <div class="mb-3">
+            <label for="baby_weight" class="form-label">Berat Bayi Baru Lahir (kg)</label>
+            <input type="number" class="form-control" id="baby_weight" name="baby_weight" required>
+        </div>
+        <div class="mb-3">
+            <label for="carbo" class="form-label">Karbohidrat dalam Kemasan (gr)</label>
+            <input type="number" class="form-control" id="carbo" name="carbo" required>
+        </div>
+        <button type="submit" class="btn btn-primary">Hitung</button>
+    </form>
+</div>
+
+<!-- Riwayat Perhitungan Karbohidrat -->
+<div class="container mt-5">
+    <h3 class="text-center">Riwayat Perhitungan Karbohidrat</h3>
+    <table class="table table-bordered">
+        <thead>
+            <tr>
+                <th>No</th>
+                <th>Nama</th>
+                <th>Kondisi</th>
+                <th>Usia</th>
+                <th>Berat Badan</th>
+                <th>Berat Bayi</th>
+                <th>Karbohidrat (gr)</th>
+                <th>% Karbohidrat</th>
+                <th>Tanggal</th>
+            </tr>
+        </thead>
+        <tbody>
+        <?php
+    if ($user_id !== null) {
+        $stmt = $connect->prepare("SELECT * FROM karbohidrat_data WHERE user_id = :user_id ORDER BY id DESC");
+        $stmt->bindParam(':user_id', $user_id);
+        if ($stmt->execute()) {
+            echo "Query executed successfully.<br>";
+            $results = $stmt->fetchAll(PDO::FETCH_ASSOC);
+            echo "Number of records found: " . count($results) . "<br>";
+
+            if ($results) {
+                $no = 1;
+                foreach ($results as $row) {
+                    echo "<tr>";
+                    echo "<td>" . $no++ . "</td>";
+                    echo "<td>" . $row['nama'] . "</td>";
+                    echo "<td>" . $row['kondisi'] . "</td>";
+                    echo "<td>" . $row['umur'] . "</td>";
+                    echo "<td>" . $row['berat_badan'] . "</td>";
+                    echo "<td>" . $row['berat_bayi'] . "</td>";
+                    echo "<td>" . $row['karbo_dalam_kemasan'] . "</td>";
+                    echo "<td>" . $row['karbo_persen'] . "%</td>";
+                    echo "<td>" . $row['tanggal'] . "</td>"; // Ubah dari 'waktu' ke 'tanggal'
+                    echo "</tr>";
+                }
+            } else {
+                echo "<tr><td colspan='8' class='text-center'>Belum ada riwayat perhitungan</td></tr>";
+            }
+        } else {
+            echo "Error executing query.";
+        }
+    } else {
+        echo "<tr><td colspan='8' class='text-center'>Anda belum login.</td></tr>";
+    }
+    ?>
+        </tbody>
+    </table>
+</div>
+
+<!-- Footer-->
+<aside style="background-color: #f8f9fa;">
+    <footer class="text-center py-5">
+      <div class="container px-5">
+        <div class="text-black-100 small">
+          <div class="mb-2">&copy; Your Website 2024. All Rights Reserved.</div>
+          <a class="text-black" href="#!">Privacy</a>
+          <span class="mx-1">&middot;</span>
+          <a class="text-black" href="#!">Terms</a>
+          <span class="mx-1">&middot;</span>
+          <a class="text-black" href="#!">FAQ</a>
+        </div>
+      </div>
+    </footer>
+    </aside>
+<!-- Bootstrap JS -->
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"></script>
 </body>
 </html>
