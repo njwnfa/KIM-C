@@ -29,6 +29,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     $age = $_POST['age'];
     $weight = $_POST['weight'];
     $baby_weight = $_POST['baby_weight'];
+    $diabetes_history = $_POST['diabetes_history'];
     $carbo = $_POST['carbo'];
     $condition = $_POST['condition'];
     $user_id = $_SESSION['user_id'];
@@ -56,8 +57,8 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     }
 
     // Insert data ke database
-    $sql = "INSERT INTO karbohidrat_data (user_id, nama, umur, berat_badan, berat_bayi, karbo_dalam_kemasan, karbo_persen, saran, peringatan, kondisi) 
-            VALUES (:user_id, :nama, :umur, :berat_badan, :berat_bayi, :karbo_dalam_kemasan, :karbo_persen, :saran, :peringatan, :kondisi)";
+    $sql = "INSERT INTO karbohidrat_data (user_id, nama, umur, berat_badan, berat_bayi, riwayat_diabetes, karbo_dalam_kemasan, karbo_persen, saran, peringatan, kondisi) 
+            VALUES (:user_id, :nama, :umur, :berat_badan, :berat_bayi, :riwayat_diabetes, :karbo_dalam_kemasan, :karbo_persen, :saran, :peringatan, :kondisi)";
     $stmt = $connect->prepare($sql);
 
     $stmt->bindParam(':user_id', $user_id);
@@ -66,6 +67,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     $stmt->bindParam(':umur', $age);
     $stmt->bindParam(':berat_badan', $weight);
     $stmt->bindParam(':berat_bayi', $baby_weight);
+    $stmt->bindParam(':riwayat_diabetes', $diabetes_history);
     $stmt->bindParam(':karbo_dalam_kemasan', $carbo);
     $stmt->bindParam(':karbo_persen', $karbo_persen);
     $stmt->bindParam(':saran', $saran);
@@ -88,8 +90,19 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
                 <p><strong>Nama:</strong> $nama</p>
                 <p><strong>Kondisi:</strong> " . ucfirst($condition) . "</p>
                 <p><strong>Usia:</strong> $age tahun</p>
-                <p><strong>Berat Badan:</strong> $weight kg</p>
-                <p><strong>Berat Bayi Baru Lahir:</strong> $baby_weight kg</p>
+                <p><strong>Berat Badan:</strong> $weight kg</p>";
+
+    // Jika kondisi hamil, tampilkan riwayat diabetes
+    if ($condition == 'hamil') {
+        echo "<p><strong>Riwayat Diabetes:</strong> $diabetes_history</p>";
+    }
+
+    // Jika kondisi menyusui, tampilkan berat bayi
+    if ($condition == 'menyusui') {
+        echo "<p><strong>Berat Bayi Baru Lahir:</strong> $baby_weight kg</p>";
+    }
+
+    echo "
                 <p><strong>Karbohidrat dalam Kemasan:</strong> $carbo gr</p>
                 <hr>
                 <p>Dari produk ini, Anda telah mengonsumsi <strong>$carbo</strong> gram karbohidrat, yang setara dengan <strong>" . number_format($karbo_persen, 2) . " %</strong> dari kebutuhan harian Anda sebagai <strong>" . ucfirst($condition) . "</strong>.</p>
@@ -97,6 +110,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
                     <strong>Peringatan!</strong> Kelebihan konsumsi karbohidrat dapat meningkatkan risiko diabetes. Untuk informasi lebih lanjut, konsultasikan dengan dokter Anda.
                 </div>
                 <p>$saran</p>";
+
 
     if (!empty($peringatan)) {
         echo "

@@ -75,23 +75,31 @@ $user_id = isset($_SESSION['user_id']) ? $_SESSION['user_id'] : null;
     <form method="POST" action="cek_karbohidrat.php">
         <div class="mb-3">
             <label for="condition" class="form-label">Kondisi Ibu</label>
-                <select class="form-control" id="condition" name="condition" required>
-                    <option value="">Pilih Kondisi</option>
-                    <option value="hamil">Hamil</option>
-                    <option value="menyusui">Menyusui</option>
-                </select>
+            <select class="form-control" id="condition" name="condition" required onchange="toggleFormFields()">
+                <option value="">Pilih Kondisi</option>
+                <option value="hamil">Hamil</option>
+                <option value="menyusui">Menyusui</option>
+            </select>
         </div>
         <div class="mb-3">
             <label for="age" class="form-label">Usia</label>
             <input type="number" class="form-control" id="age" name="age" required>
         </div>
+        <div class="mb-3" id="baby_weight_div" style="display: none;">
+            <label for="baby_weight" class="form-label">Berat Bayi Baru Lahir (kg)</label>
+            <input type="number" class="form-control" id="baby_weight" name="baby_weight">
+        </div>
+        <div class="mb-3" id="diabetes_history_div" style="display: none;">
+            <label for="diabetes_history" class="form-label">Apakah Ada Riwayat Diabetes dalam Keluarga?</label>
+            <select class="form-control" id="diabetes_history" name="diabetes_history">
+                <option value="">Pilih</option>
+                <option value="ya">Ya</option>
+                <option value="tidak">Tidak</option>
+            </select>
+        </div>
         <div class="mb-3">
             <label for="weight" class="form-label">Berat Badan (kg)</label>
             <input type="number" class="form-control" id="weight" name="weight" required>
-        </div>
-        <div class="mb-3">
-            <label for="baby_weight" class="form-label">Berat Bayi Baru Lahir (kg)</label>
-            <input type="number" class="form-control" id="baby_weight" name="baby_weight" required>
         </div>
         <div class="mb-3">
             <label for="carbo" class="form-label">Karbohidrat dalam Kemasan (gr)</label>
@@ -113,6 +121,7 @@ $user_id = isset($_SESSION['user_id']) ? $_SESSION['user_id'] : null;
                 <th>Usia</th>
                 <th>Berat Badan</th>
                 <th>Berat Bayi</th>
+                <th>Riwayat Diabetes</th>
                 <th>Karbohidrat (gr)</th>
                 <th>% Karbohidrat</th>
                 <th>Tanggal</th>
@@ -138,13 +147,14 @@ $user_id = isset($_SESSION['user_id']) ? $_SESSION['user_id'] : null;
                     echo "<td>" . $row['umur'] . "</td>";
                     echo "<td>" . $row['berat_badan'] . "</td>";
                     echo "<td>" . $row['berat_bayi'] . "</td>";
+                    echo "<td>" . $row['riwayat_diabetes'] . "</td>";
                     echo "<td>" . $row['karbo_dalam_kemasan'] . "</td>";
                     echo "<td>" . $row['karbo_persen'] . "%</td>";
                     echo "<td>" . $row['tanggal'] . "</td>"; // Ubah dari 'waktu' ke 'tanggal'
                     echo "</tr>";
                 }
             } else {
-                echo "<tr><td colspan='9' class='text-center'>Belum ada riwayat perhitungan</td></tr>";
+                echo "<tr><td colspan='10' class='text-center'>Belum ada riwayat perhitungan</td></tr>";
             }
         } else {
             echo "Error executing query.";
@@ -176,3 +186,22 @@ $user_id = isset($_SESSION['user_id']) ? $_SESSION['user_id'] : null;
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"></script>
 </body>
 </html>
+
+<script>
+function toggleFormFields() {
+    var condition = document.getElementById('condition').value;
+    var babyWeightDiv = document.getElementById('baby_weight_div');
+    var diabetesHistoryDiv = document.getElementById('diabetes_history_div');
+
+    if (condition === 'menyusui') {
+        babyWeightDiv.style.display = 'block';
+        diabetesHistoryDiv.style.display = 'none';
+    } else if (condition === 'hamil') {
+        babyWeightDiv.style.display = 'none';
+        diabetesHistoryDiv.style.display = 'block';
+    } else {
+        babyWeightDiv.style.display = 'none';
+        diabetesHistoryDiv.style.display = 'none';
+    }
+}
+</script>

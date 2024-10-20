@@ -112,7 +112,7 @@
             <form action="login/login.php" method="post">
               <div class="mb-3">
                 <label for="loginEmail" class="form-label">Email address</label>
-                <input type="email" class="form-control" id="loginEmail" name="email" required />
+                <input type="text" class="form-control" id="loginEmail" name="email" required />
               </div>
               <div class="mb-3">
                 <label for="loginPassword" class="form-label">Password</label>
