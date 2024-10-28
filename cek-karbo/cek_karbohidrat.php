@@ -120,7 +120,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
         $stmt->bindParam(':risiko', $risiko, PDO::PARAM_STR);
 
         $stmt->execute();
-        echo "Data berhasil disimpan.";
+        echo "";
     } catch (PDOException $e) {
         echo "Error: " . $e->getMessage();
     }
