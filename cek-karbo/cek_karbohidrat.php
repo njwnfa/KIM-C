@@ -7,6 +7,9 @@
     
     <!-- Bootstrap CSS -->
     <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+
+    <!-- SweetAlert CSS & JS -->
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
     
     <!-- Optional Bootstrap JS and Popper.js -->
     <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
@@ -23,6 +26,45 @@ include '../config/koneksi.php';
 if (!isset($_SESSION['user_id'])) {
     header("Location: ../login.php");
     exit;
+}
+
+if (isset($_GET['delete_id'])) {
+    $delete_id = $_GET['delete_id'];
+    $user_id = $_SESSION['user_id'];
+    
+    try {
+        $sql = "DELETE FROM karbohidrat_data WHERE id = :delete_id AND user_id = :user_id";
+        $stmt = $connect->prepare($sql);
+        $stmt->bindParam(':delete_id', $delete_id, PDO::PARAM_INT);
+        $stmt->bindParam(':user_id', $user_id, PDO::PARAM_INT);
+        
+        if ($stmt->execute()) {
+            echo "<script>
+                    Swal.fire({
+                        icon: 'success',
+                        title: 'Data berhasil dihapus',
+                        showConfirmButton: false,
+                        timer: 1500
+                    }).then(() => {
+                        window.location.href = 'index.php';
+                    });
+                </script>";
+        } else {
+            echo "<script>
+                    Swal.fire({
+                        icon: 'error',
+                        title: 'Gagal menghapus data',
+                        text: 'Terjadi kesalahan saat menghapus data.',
+                        showConfirmButton: false,
+                        timer: 1500
+                    }).then(() => {
+                        window.location.href = 'index.php';
+                    });
+                </script>";
+        }
+    } catch (PDOException $e) {
+        echo "Error: " . $e->getMessage();
+    }
 }
 
 if ($_SERVER['REQUEST_METHOD'] == 'POST') {
@@ -124,8 +166,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     } catch (PDOException $e) {
         echo "Error: " . $e->getMessage();
     }
-
-
+    
     // Output hasil
     echo "
     <div class='container mt-5'>

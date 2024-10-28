@@ -7,6 +7,7 @@
     <meta name="author" content="" />
     <title>Cek Karbohidrat</title>
     <link rel="icon" type="image/x-icon" href="../assets/favicon.ico" />
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
     <!-- Bootstrap icons-->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.5.0/font/bootstrap-icons.css" rel="stylesheet" />
     <!-- Google fonts-->
@@ -151,7 +152,10 @@ $user_id = isset($_SESSION['user_id']) ? $_SESSION['user_id'] : null;
                         echo "<td>" . $row['karbo_dalam_kemasan'] . "</td>";
                         echo "<td>" . $row['karbo_persen'] . "%</td>";
                         echo "<td>" . $row['tanggal'] . "</td>";
-                        echo "<td><button class='btn btn-warning' onclick='editData(" . json_encode($row) . ")'>Edit</button></td>";
+                        echo "<td>
+                                <button class='btn btn-warning' onclick='editData(" . json_encode($row) . ")'>Edit</button>
+                                <button class='btn btn-danger' onclick='deleteData(" . $row['id'] . ")'>Delete</button>
+                            </td>";
                         echo "</tr>";
                     }
                 } else {
@@ -235,3 +239,23 @@ function editData(rowData) {
     document.getElementById('record_id').value = rowData.id;
 }
 </script>
+
+<script>
+function deleteData(recordId) {
+    Swal.fire({
+        title: "Apakah Anda yakin?",
+        text: "Data yang dihapus tidak dapat dikembalikan!",
+        icon: "warning",
+        showCancelButton: true,
+        confirmButtonColor: "#3085d6",
+        cancelButtonColor: "#d33",
+        confirmButtonText: "Ya, Hapus",
+        cancelButtonText: "Batal"
+    }).then((result) => {
+        if (result.isConfirmed) {
+            window.location.href = "cek_karbohidrat.php?delete_id=" + recordId;
+        }
+    });
+}
+</script>
+

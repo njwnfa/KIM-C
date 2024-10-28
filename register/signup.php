@@ -1,4 +1,5 @@
 <?php
+session_start(); 
 include '../config/koneksi.php';
 
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
@@ -13,7 +14,9 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $stmt->execute();
 
     if ($stmt->rowCount() > 0) {
-        echo "<script>alert('Email already exists');window.location.href='../index.php';</script>";
+        $_SESSION['show_alert'] = 'email_exists'; // Alert jika email sudah digunakan
+        header("Location: ../index.php");
+        exit;
     } else {
         // Simpan user baru
         $stmt = $connect->prepare("INSERT INTO users (name, email, password, level) VALUES (:name, :email, :password, :level)");
@@ -22,10 +25,13 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         $stmt->bindParam(':password', $password);
         $stmt->bindParam(':level', $level);
         if ($stmt->execute()) {
-            echo "<script>alert('Registration successful! Please login.');window.location.href='../index.php';</script>";
+            $_SESSION['show_alert'] = 'registration_success'; // Alert sukses registrasi
+            header("Location: ../index.php");
         } else {
-            echo "<script>alert('Registration failed!');window.location.href='../index.php';</script>";
+            $_SESSION['show_alert'] = 'registration_failed'; // Alert gagal registrasi
+            header("Location: ../index.php");
         }
+        exit;
     }
 }
 ?>

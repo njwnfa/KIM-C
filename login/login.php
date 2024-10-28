@@ -1,5 +1,7 @@
 <?php
 include '../config/koneksi.php';
+session_start();
+$_SESSION['show_alert'] = true;
 
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $email = $_POST['email'];
@@ -17,6 +19,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         $_SESSION['user_id'] = $user['id'];
         $_SESSION['user_name'] = $user['name'];
         $_SESSION['level'] = $user['level'];
+        $_SESSION['show_alert'] = 'login_success'; // Alert berhasil login
 
         if ($user['level'] == 'admin') {
             header("Location: ../admin/dashboard/dashboard.php");
@@ -24,7 +27,10 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             header("Location: ../index.php");
         }
     } else {
-        echo "<script>alert('Invalid email or password');window.location.href='../index.php';</script>";
+        $_SESSION['show_alert'] = 'login_failed'; // Alert gagal login
+        header("Location: ../index.php");
+        exit;
     }
 }
+
 ?>

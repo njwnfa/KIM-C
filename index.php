@@ -7,6 +7,7 @@
     <meta name="author" content="" />
     <title>KIM-C</title>
     <link rel="icon" type="image/x-icon" href="assets/favicon.ico" />
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
     <!-- Bootstrap icons-->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.5.0/font/bootstrap-icons.css" rel="stylesheet" />
     <!-- Google fonts-->
@@ -54,6 +55,52 @@
     <!-- Navigation-->
     <?php
     session_start();
+    if (isset($_SESSION['show_alert'])) {
+      echo "<script>
+          document.addEventListener('DOMContentLoaded', function() {";
+
+          if ($_SESSION['show_alert'] === 'email_exists') {
+            echo "Swal.fire({
+                title: 'Email Sudah Digunakan',
+                text: 'Email yang Anda masukkan sudah terdaftar. Silakan coba email lain.',
+                icon: 'error',
+                confirmButtonText: 'OK'
+            });";
+        } elseif ($_SESSION['show_alert'] === 'registration_success') {
+            echo "Swal.fire({
+                title: 'Registrasi Berhasil!',
+                text: 'Silakan login untuk melanjutkan.',
+                icon: 'success',
+                confirmButtonText: 'OK'
+            });";
+        } elseif ($_SESSION['show_alert'] === 'registration_failed') {
+            echo "Swal.fire({
+                title: 'Registrasi Gagal',
+                text: 'Terjadi kesalahan saat melakukan registrasi. Silakan coba lagi.',
+                icon: 'error',
+                confirmButtonText: 'OK'
+            });";
+        } elseif ($_SESSION['show_alert'] === 'login_failed') {
+          echo "Swal.fire({
+              title: 'Login Failed',
+              text: 'Email atau kata sandi tidak valid. Silakan coba lagi.',
+              icon: 'error',
+              confirmButtonText: 'OK'
+          });";
+      } elseif ($_SESSION['show_alert'] === 'login_success') {
+          echo "Swal.fire({
+              title: 'Selamat datang di KIM-C, {$_SESSION['user_name']}!',
+              text: 'Aplikasi Cek Karbohidrat Ibu Hamil dan Menyusui.',
+              icon: 'success',
+              confirmButtonText: 'OK'
+          });";
+      }
+  
+      echo "});</script>";
+      unset($_SESSION['show_alert']); // Hapus alert setelah ditampilkan
+  }
+  
+      
     ?>
 
 <nav class="navbar navbar-expand-lg navbar-light fixed-top shadow-sm" id="mainNav" style="background-color: #ffc670;">
