@@ -7,18 +7,8 @@ if (!isset($_SESSION['user_id']) || $_SESSION['level'] != 'admin') {
 
 include '../../config/koneksi.php';
 
-// Query untuk mendapatkan jumlah user
-$queryUsers = $connect->query("SELECT COUNT(*) AS total_users FROM users")->fetch(PDO::FETCH_ASSOC);
-
-// Query untuk mendapatkan jumlah risiko tinggi
-$queryHighRisk = $connect->query("SELECT COUNT(*) AS total_high_risk FROM karbohidrat_data WHERE risiko = 'Resiko Tinggi'")->fetch(PDO::FETCH_ASSOC);
-
-// Query untuk mendapatkan jumlah risiko rendah
-$queryLowRisk = $connect->query("SELECT COUNT(*) AS total_low_risk FROM karbohidrat_data WHERE risiko = 'Resiko Rendah'")->fetch(PDO::FETCH_ASSOC);
-
-// // Query untuk mendapatkan jumlah user
-// $queryHistory = $connect->query("SELECT COUNT(*) AS total_history FROM karbohidrat_data")->fetch(PDO::FETCH_ASSOC);
-
+// Query untuk mendapatkan seluruh riwayat data perhitungan
+$queryHistory = $connect->query("SELECT * FROM karbohidrat_data ORDER BY tanggal DESC")->fetchAll(PDO::FETCH_ASSOC);
 
 ?>
 
@@ -27,14 +17,12 @@ $queryLowRisk = $connect->query("SELECT COUNT(*) AS total_low_risk FROM karbohid
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Admin Dashboard</title>
+    <title>History Data Perhitungan</title>
 
     <!-- Bootstrap 5 -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">
     <!-- Chart.js -->
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
-
-    <!-- Custom CSS -->
     <style>
         body {
             font-family: 'Arial', sans-serif;
@@ -92,6 +80,25 @@ $queryLowRisk = $connect->query("SELECT COUNT(*) AS total_low_risk FROM karbohid
             max-width: 400px; /* Set max width for the container */
             margin: auto; /* Center the chart */
         }
+        /* Aturan khusus untuk pencetakan */
+    @media print {
+        body {
+            background-color: #fff;
+        }
+        .sidebar, .btn-primary, .h2, .border-bottom {
+            display: none; /* Sembunyikan elemen yang tidak ingin dicetak */
+        }
+        .main-content {
+            padding: 0;
+        }
+        .table-bordered {
+            width: 100%;
+        }
+        .chart-container {
+            max-width: 100%; /* Sesuaikan ukuran chart untuk tampilan cetak */
+            box-shadow: none;
+        }
+    }
     </style>
 </head>
 <body>
@@ -105,10 +112,10 @@ $queryLowRisk = $connect->query("SELECT COUNT(*) AS total_low_risk FROM karbohid
                 <hr>
                 <ul class="nav flex-column">
                     <li class="nav-item">
-                        <a class="nav-link" href="#">Dashboard</a>
+                        <a class="nav-link" href="../dashboard/dashboard.php">Dashboard</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="../history/history.php">History</a>
+                        <a class="nav-link" href="#">History</a>
                     </li>
                     <li class="nav-item">
                         <a class="nav-link" href="../../logout/logout.php">Logout</a>
@@ -123,63 +130,75 @@ $queryLowRisk = $connect->query("SELECT COUNT(*) AS total_low_risk FROM karbohid
                 <h1 class="h2">Welcome, <?php echo $_SESSION['user_name']; ?></h1>
             </div>
 
-            <!-- Dashboard Stats -->
-            <div class="row">
-                <!-- Total Users -->
-                <div class="col-md-6 col-lg-4 mb-4">
-                    <div class="card card-custom text-center">
-                        <div class="card-body">
-                            <h5 class="card-title">Total Users</h5>
-                            <p class="card-text"><?php echo $queryUsers['total_users']; ?></p>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- Kategori Risiko Rendah -->
-                <div class="col-md-6 col-lg-4 mb-4">
-                    <div class="card card-custom text-center">
-                        <div class="card-body">
-                            <h5 class="card-title">Kategori Risiko Rendah</h5>
-                            <p class="card-text"><?php echo $queryLowRisk['total_low_risk']; ?></p>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- Kategori Risiko Tinggi -->
-                <div class="col-md-6 col-lg-4 mb-4">
-                    <div class="card card-custom text-center">
-                        <div class="card-body">
-                            <h5 class="card-title">Kategori Risiko Tinggi</h5>
-                            <p class="card-text"><?php echo $queryHighRisk['total_high_risk']; ?></p>
-                        </div>
-                    </div>
-                </div>
+            <h1 class="text-center">Riwayat Data Perhitungan</h1>
+    
+            <!-- Tabel Riwayat Perhitungan -->
+            <div class="table-responsive mt-4">
+                <table class="table table-bordered">
+                    <thead>
+                        <tr>
+                            <th>ID</th>
+                            <th>Nama</th>
+                            <th>Kondisi</th>
+                            <th>Umur</th>
+                            <th>Berat Badan</th>
+                            <th>Berat Bayi</th>
+                            <th>Karbohidrat (%)</th>
+                            <th>Risiko</th>
+                            <th>Tanggal</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <?php foreach ($queryHistory as $row): ?>
+                            <tr>
+                                <td><?php echo $row['id']; ?></td>
+                                <td><?php echo $row['nama']; ?></td>
+                                <td><?php echo $row['kondisi']; ?></td>
+                                <td><?php echo $row['umur']; ?></td>
+                                <td><?php echo $row['berat_badan']; ?></td>
+                                <td><?php echo $row['berat_bayi']; ?></td>
+                                <td><?php echo $row['karbo_persen']; ?>%</td>
+                                <td><?php echo $row['risiko']; ?></td>
+                                <td><?php echo $row['tanggal']; ?></td>
+                            </tr>
+                        <?php endforeach; ?>
+                    </tbody>
+                </table>
             </div>
 
-            <!-- Pie Chart -->
-            <div class="chart-container">
-                <h5 class="text-center">Risiko Chart (Bulan ini)</h5>
-                <canvas id="riskChart"></canvas>
+            <!-- Pie Chart untuk Risiko -->
+            <div class="chart-container mt-4" style="max-width: 600px; margin: auto;">
+                <h5 class="text-center">Distribusi Risiko</h5>
+                <canvas id="riskHistoryChart"></canvas>
             </div>
 
-        </main>
+            <!-- Tombol Cetak -->
+            <div class="text-center mt-4">
+                <button onclick="window.print()" class="btn btn-primary">Cetak Data</button>
+            </div>
+
+                </main>
+            </div>
     </div>
-</div>
 
 <!-- Bootstrap 5 JS -->
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
 
 <script>
-    const ctx = document.getElementById('riskChart').getContext('2d');
-    const riskChart = new Chart(ctx, {
+    // Data untuk Pie Chart
+    const riskCounts = {
+        highRisk: <?php echo $connect->query("SELECT COUNT(*) AS count FROM karbohidrat_data WHERE risiko = 'Resiko Tinggi'")->fetch(PDO::FETCH_ASSOC)['count']; ?>,
+        lowRisk: <?php echo $connect->query("SELECT COUNT(*) AS count FROM karbohidrat_data WHERE risiko = 'Resiko Rendah'")->fetch(PDO::FETCH_ASSOC)['count']; ?>
+    };
+
+    // Menginisialisasi Pie Chart
+    const ctx = document.getElementById('riskHistoryChart').getContext('2d');
+    new Chart(ctx, {
         type: 'pie',
         data: {
             labels: ['Risiko Tinggi', 'Risiko Rendah'],
             datasets: [{
-                data: [
-                    <?php echo $queryHighRisk['total_high_risk']; ?>,
-                    <?php echo $queryLowRisk['total_low_risk']; ?>
-                ],
+                data: [riskCounts.highRisk, riskCounts.lowRisk],
                 backgroundColor: ['#FF8C00', '#28A745'],
                 hoverBackgroundColor: ['#FF4500', '#32CD32'],
                 borderColor: '#f1f3f4',
@@ -194,19 +213,10 @@ $queryLowRisk = $connect->query("SELECT COUNT(*) AS total_low_risk FROM karbohid
                     position: 'bottom',
                     labels: {
                         color: '#555',
-                        font: {
-                            size: 14
-                        }
+                        font: { size: 14 }
                     }
                 },
                 tooltip: {
-                    backgroundColor: 'rgba(0, 0, 0, 0.7)',
-                    titleFont: {
-                        size: 16
-                    },
-                    bodyFont: {
-                        size: 14
-                    },
                     callbacks: {
                         label: function(context) {
                             let total = context.dataset.data.reduce((acc, value) => acc + value, 0);

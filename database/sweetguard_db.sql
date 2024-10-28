@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Waktu pembuatan: 22 Okt 2024 pada 05.54
+-- Waktu pembuatan: 28 Okt 2024 pada 09.01
 -- Versi server: 10.4.24-MariaDB
 -- Versi PHP: 8.1.6
 
@@ -40,6 +40,7 @@ CREATE TABLE `karbohidrat_data` (
   `karbo_persen` decimal(5,2) DEFAULT NULL,
   `saran` text DEFAULT NULL,
   `peringatan` text DEFAULT NULL,
+  `risiko` varchar(50) DEFAULT NULL,
   `tanggal` timestamp NOT NULL DEFAULT current_timestamp()
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
@@ -47,19 +48,12 @@ CREATE TABLE `karbohidrat_data` (
 -- Dumping data untuk tabel `karbohidrat_data`
 --
 
-INSERT INTO `karbohidrat_data` (`id`, `user_id`, `nama`, `kondisi`, `umur`, `berat_badan`, `berat_bayi`, `riwayat_diabetes`, `karbo_dalam_kemasan`, `karbo_persen`, `saran`, `peringatan`, `tanggal`) VALUES
-(17, 1, 'Mohammad Jindan Dubbay Al Faresh', 'hamil', 45, '45.00', '5.00', '', '5.00', '1.45', 'Untuk menjaga kesehatan, disarankan agar konsumsi karbohidrat Anda tidak melebihi 345 gram per hari.', 'Karena usia Anda lebih dari 30 tahun, Anda termasuk dalam kategori risiko tinggi untuk diabetes. Harap batasi konsumsi karbohidrat untuk menghindari risiko diabetes.', '2024-10-12 17:16:31'),
-(18, 1, 'Mohammad Jindan Dubbay Al Faresh', 'hamil', 43, '45.00', '2.00', '', '3.00', '0.87', 'Untuk menjaga kesehatan, disarankan agar konsumsi karbohidrat Anda tidak melebihi 345 gram per hari.', 'Karena usia Anda lebih dari 30 tahun, Anda termasuk dalam kategori risiko tinggi untuk diabetes. Harap batasi konsumsi karbohidrat untuk menghindari risiko diabetes.', '2024-10-12 17:16:57'),
-(19, 1, 'Mohammad Jindan Dubbay Al Faresh', 'menyusui', 23, '45.00', '3.00', '', '3.00', '0.83', 'Untuk menjaga kesehatan, disarankan agar konsumsi karbohidrat Anda tidak melebihi 360 gram per hari.', '', '2024-10-12 17:17:40'),
-(20, 1, 'Mohammad Jindan Dubbay Al Faresh', 'menyusui', 23, '45.00', '3.00', '', '3.00', '0.83', 'Untuk menjaga kesehatan, disarankan agar konsumsi karbohidrat Anda tidak melebihi 360 gram per hari.', '', '2024-10-12 17:17:57'),
-(21, 1, 'Mohammad Jindan Dubbay Al Faresh', 'menyusui', 23, '45.00', '3.00', '', '3.00', '0.83', 'Untuk menjaga kesehatan, disarankan agar konsumsi karbohidrat Anda tidak melebihi 360 gram per hari.', '', '2024-10-12 17:18:10'),
-(22, 1, 'Mohammad Jindan Dubbay Al Faresh', 'menyusui', 23, '45.00', '3.00', '', '3.00', '0.83', 'Untuk menjaga kesehatan, disarankan agar konsumsi karbohidrat Anda tidak melebihi 360 gram per hari.', '', '2024-10-12 17:18:19'),
-(23, 1, 'Mohammad Jindan Dubbay Al Faresh', 'menyusui', 23, '45.00', '3.00', '', '3.00', '0.83', 'Untuk menjaga kesehatan, disarankan agar konsumsi karbohidrat Anda tidak melebihi 360 gram per hari.', '', '2024-10-12 17:18:27'),
-(24, 1, 'Mohammad Jindan Dubbay Al Faresh', 'hamil', 46, '45.00', '2.00', '', '2.00', '0.58', 'Untuk menjaga kesehatan, disarankan agar konsumsi karbohidrat Anda tidak melebihi 345 gram per hari.', 'Karena usia Anda lebih dari 30 tahun, Anda termasuk dalam kategori risiko tinggi untuk diabetes. Harap batasi konsumsi karbohidrat untuk menghindari risiko diabetes.', '2024-10-12 17:20:46'),
-(25, 1, 'Mohammad Jindan Dubbay Al Faresh', 'hamil', 46, '45.00', '2.00', '', '2.00', '0.58', 'Untuk menjaga kesehatan, disarankan agar konsumsi karbohidrat Anda tidak melebihi 345 gram per hari.', 'Karena usia Anda lebih dari 30 tahun, Anda termasuk dalam kategori risiko tinggi untuk diabetes. Harap batasi konsumsi karbohidrat untuk menghindari risiko diabetes.', '2024-10-12 17:20:55'),
-(26, 1, 'Mohammad Jindan Dubbay Al Faresh', 'hamil', 46, '45.00', '2.00', '', '2.00', '0.58', 'Untuk menjaga kesehatan, disarankan agar konsumsi karbohidrat Anda tidak melebihi 345 gram per hari.', 'Karena usia Anda lebih dari 30 tahun, Anda termasuk dalam kategori risiko tinggi untuk diabetes. Harap batasi konsumsi karbohidrat untuk menghindari risiko diabetes.', '2024-10-12 17:21:27'),
-(27, 1, 'Mohammad Jindan Dubbay Al Faresh', 'hamil', 46, '45.00', '0.00', 'ya', '4.00', '1.16', 'Untuk menjaga kesehatan, disarankan agar konsumsi karbohidrat Anda tidak melebihi 345 gram per hari.', 'Karena usia Anda lebih dari 30 tahun, Anda termasuk dalam kategori risiko tinggi untuk diabetes. Harap batasi konsumsi karbohidrat untuk menghindari risiko diabetes.', '2024-10-20 16:41:24'),
-(28, 1, 'Mohammad Jindan Dubbay Al Faresh', 'menyusui', 43, '45.00', '4.00', '', '5.00', '1.39', 'Untuk menjaga kesehatan, disarankan agar konsumsi karbohidrat Anda tidak melebihi 360 gram per hari.', 'Karena usia Anda lebih dari 30 tahun, Anda termasuk dalam kategori risiko tinggi untuk diabetes. Harap batasi konsumsi karbohidrat untuk menghindari risiko diabetes.', '2024-10-20 16:42:23');
+INSERT INTO `karbohidrat_data` (`id`, `user_id`, `nama`, `kondisi`, `umur`, `berat_badan`, `berat_bayi`, `riwayat_diabetes`, `karbo_dalam_kemasan`, `karbo_persen`, `saran`, `peringatan`, `risiko`, `tanggal`) VALUES
+(38, 1, 'Alisa', 'hamil', 24, '55.00', '4.00', 'tidak', '5.00', '1.45', 'Untuk menjaga kesehatan, disarankan agar konsumsi karbohidrat Anda tidak melebihi 345 gram per hari.', 'Dengan usia di bawah 25 tahun dan tanpa riwayat keluarga diabetes melitus, Anda berada dalam kategori risiko rendah untuk diabetes. Namun, menjaga pola makan seimbang tetap penting.', 'Resiko Rendah', '2024-10-28 07:15:57'),
+(39, 1, 'Alisa', 'hamil', 44, '55.00', '0.00', 'ya', '5.00', '1.45', 'Untuk menjaga kesehatan, disarankan agar konsumsi karbohidrat Anda tidak melebihi 345 gram per hari.', 'Karena usia Anda di atas 30 tahun dan memiliki riwayat keluarga diabetes melitus, Anda termasuk dalam kategori risiko tinggi untuk diabetes.', 'Resiko Tinggi', '2024-10-28 07:22:15'),
+(40, 1, 'Alisa', 'menyusui', 24, '55.00', '4.00', 'tidak', '3.00', '0.83', 'Untuk menjaga kesehatan, disarankan agar konsumsi karbohidrat Anda tidak melebihi 360 gram per hari.', 'Karena Anda memiliki riwayat melahirkan bayi dengan berat badan 4kg atau lebih, Anda termasuk dalam kategori risiko tinggi untuk diabetes.', 'Resiko Tinggi', '2024-10-28 07:22:49'),
+(41, 3, 'Yuuki', 'hamil', 33, '45.00', '0.00', 'ya', '6.00', '1.74', 'Untuk menjaga kesehatan, disarankan agar konsumsi karbohidrat Anda tidak melebihi 345 gram per hari.', 'Karena usia Anda di atas 30 tahun dan memiliki riwayat keluarga diabetes melitus, Anda termasuk dalam kategori risiko tinggi untuk diabetes.', 'Resiko Tinggi', '2024-10-28 07:41:56'),
+(42, 3, 'Yuuki', 'hamil', 22, '55.00', '0.00', 'tidak', '3.00', '0.87', 'Untuk menjaga kesehatan, disarankan agar konsumsi karbohidrat Anda tidak melebihi 345 gram per hari.', 'Dengan usia di bawah 25 tahun dan tanpa riwayat keluarga diabetes melitus, Anda berada dalam kategori risiko rendah untuk diabetes. Namun, menjaga pola makan seimbang tetap penting.', 'Resiko Rendah', '2024-10-28 07:42:13');
 
 -- --------------------------------------------------------
 
@@ -109,7 +103,7 @@ ALTER TABLE `users`
 -- AUTO_INCREMENT untuk tabel `karbohidrat_data`
 --
 ALTER TABLE `karbohidrat_data`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=29;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=43;
 
 --
 -- AUTO_INCREMENT untuk tabel `users`

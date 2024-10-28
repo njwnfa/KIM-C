@@ -269,9 +269,10 @@
     <section style="background-color: #f4c278;">
       <div class="row">
         <div class="col-md-3 team-member" data-aos="fade-up">
-          <img src="https://64.media.tumblr.com/9a13ecc88b5104893246f683c60a812e/b8f018caf5076b2e-46/s1280x1920/33d8d72a5e04d6f94c10ab6a30c11105c26181e3.jpg" alt="Jenny Wilson">
+          <img src="assets/member/aisiyah.jpg" alt="Aisiyah">
           <h4 style="padding-top: 15px;">Aisiyah Haura R</h4>
           <p>Mahasiswa RMIK</p>
+          <p>(P20637123004)</p>
           <div class="social-icons">
             <a href="#"><i class="fa-brands fa-instagram"></i></a>
             <a href="#"><i class="fa-brands fa-facebook"></i></a>
@@ -279,9 +280,10 @@
           </div>
         </div>
         <div class="col-md-3 team-member" data-aos="fade-up">
-          <img src="https://64.media.tumblr.com/9a13ecc88b5104893246f683c60a812e/b8f018caf5076b2e-46/s1280x1920/33d8d72a5e04d6f94c10ab6a30c11105c26181e3.jpg" alt="Theresa Bell">
+          <img src="assets/member/atikah.jpg" alt="Atikah">
           <h4 style="padding-top: 15px;">Atikah Shobrina</h4>
           <p>Mahasiswa RMIK</p>
+          <p>(P20637123006)</p>
           <div class="social-icons">
             <a href="#"><i class="fa-brands fa-instagram"></i></a>
             <a href="#"><i class="fa-brands fa-facebook"></i></a>
@@ -289,9 +291,10 @@
           </div>
         </div>
         <div class="col-md-3 team-member" data-aos="fade-up">
-          <img src="https://64.media.tumblr.com/9a13ecc88b5104893246f683c60a812e/b8f018caf5076b2e-46/s1280x1920/33d8d72a5e04d6f94c10ab6a30c11105c26181e3.jpg" alt="Darrell Steward">
+          <img src="assets/member/hari.jpg" alt="Hari">
           <h4 style="padding-top: 15px;">Hari Iskandar</h4>
           <p>Mahasiswa RMIK</p>
+          <p>(P20637123017)</p>
           <div class="social-icons">
             <a href="#"><i class="fa-brands fa-instagram"></i></a>
             <a href="#"><i class="fa-brands fa-facebook"></i></a>
@@ -299,9 +302,10 @@
           </div>
         </div>
         <div class="col-md-3 team-member" data-aos="fade-up">
-          <img src="https://64.media.tumblr.com/9a13ecc88b5104893246f683c60a812e/b8f018caf5076b2e-46/s1280x1920/33d8d72a5e04d6f94c10ab6a30c11105c26181e3.jpg" alt="Fiony Alveria">
+          <img src="assets/member/najwa.jpg" alt="Najwa">
           <h4 style="padding-top: 15px;">Najwa Medina Z.A.F</h4>
           <p>Mahasiswa RMIK</p>
+          <p>(P20637123028)</p>
           <div class="social-icons">
             <a href="#"><i class="fa-brands fa-instagram"></i></a>
             <a href="#"><i class="fa-brands fa-facebook"></i></a>
@@ -312,9 +316,10 @@
       <section style="background-color: #f4c278;">
         <div class="row">
           <div class="col-md-3 team-member" data-aos="fade-up">
-            <img src="https://64.media.tumblr.com/9a13ecc88b5104893246f683c60a812e/b8f018caf5076b2e-46/s1280x1920/33d8d72a5e04d6f94c10ab6a30c11105c26181e3.jpg" alt="Jenny Wilson">
+            <img src="assets/member/nazwa.jpg" alt="Nazwa">
             <h4 style="padding-top: 15px;">Nazwa Adzraa Labiqa</h4>
             <p>Mahasiswa RMIK</p>
+            <p>(P20637123031)</p>
             <div class="social-icons">
               <a href="#"><i class="fa-brands fa-instagram"></i></a>
               <a href="#"><i class="fa-brands fa-facebook"></i></a>
@@ -322,9 +327,10 @@
             </div>
           </div>
           <div class="col-md-3 team-member" data-aos="fade-up">
-            <img src="https://64.media.tumblr.com/9a13ecc88b5104893246f683c60a812e/b8f018caf5076b2e-46/s1280x1920/33d8d72a5e04d6f94c10ab6a30c11105c26181e3.jpg" alt="Theresa Bell">
+            <img src="assets/member/nurfarida.jpg" alt="Farida">
             <h4 style="padding-top: 15px;">Nur Farida Laila</h4>
             <p>Mahasiswa RMIK</p>
+            <p>(P20637123032)</p>
             <div class="social-icons">
               <a href="#"><i class="fa-brands fa-instagram"></i></a>
               <a href="#"><i class="fa-brands fa-facebook"></i></a>
@@ -332,9 +338,10 @@
             </div>
           </div>
           <div class="col-md-3 team-member" data-aos="fade-up">
-            <img src="https://64.media.tumblr.com/9a13ecc88b5104893246f683c60a812e/b8f018caf5076b2e-46/s1280x1920/33d8d72a5e04d6f94c10ab6a30c11105c26181e3.jpg" alt="Darrell Steward">
+            <img src="assets/member/revita.jpg" alt="Revita">
             <h4 style="padding-top: 15px;">Revita Wulandari</h4>
             <p>Mahasiswa RMIK</p>
+            <p>(P20637123037)</p>
             <div class="social-icons">
               <a href="#"><i class="fa-brands fa-instagram"></i></a>
               <a href="#"><i class="fa-brands fa-facebook"></i></a>
@@ -342,9 +349,10 @@
             </div>
           </div>
           <div class="col-md-3 team-member" data-aos="fade-up">
-            <img src="https://64.media.tumblr.com/9a13ecc88b5104893246f683c60a812e/b8f018caf5076b2e-46/s1280x1920/33d8d72a5e04d6f94c10ab6a30c11105c26181e3.jpg" alt="Fiony Alveria">
+            <img src="assets/member/santi.jpg" alt="Santi">
             <h4 style="padding-top: 15px;">Santi Prihantini</h4>
             <p>Mahasiswa RMIK</p>
+            <p>(P20637123038)</p>
             <div class="social-icons">
               <a href="#"><i class="fa-brands fa-instagram"></i></a>
               <a href="#"><i class="fa-brands fa-facebook"></i></a>

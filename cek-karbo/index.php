@@ -73,6 +73,7 @@ $user_id = isset($_SESSION['user_id']) ? $_SESSION['user_id'] : null;
 <div class="container mt-5" style="background-color: #ffffff; border-radius: 10px; box-shadow: 0 0 20px rgba(0, 0, 0, 0.1); padding: 30px; padding-top: 80px; margin-top: 200px;">
     <h2 class="text-center">Cek Konsumsi Karbohidrat</h2>
     <form method="POST" action="cek_karbohidrat.php">
+        <input type="hidden" id="record_id" name="record_id" value="" />
         <div class="mb-3">
             <label for="condition" class="form-label">Kondisi Ibu</label>
             <select class="form-control" id="condition" name="condition" required onchange="toggleFormFields()">
@@ -125,45 +126,45 @@ $user_id = isset($_SESSION['user_id']) ? $_SESSION['user_id'] : null;
                 <th>Karbohidrat (gr)</th>
                 <th>% Karbohidrat</th>
                 <th>Tanggal</th>
+                <th>Action</th>
             </tr>
         </thead>
         <tbody>
         <?php
-    if ($user_id !== null) {
-        $stmt = $connect->prepare("SELECT * FROM karbohidrat_data WHERE user_id = :user_id ORDER BY id DESC");
-        $stmt->bindParam(':user_id', $user_id);
-        if ($stmt->execute()) {
-            echo "Query executed successfully.<br>";
-            $results = $stmt->fetchAll(PDO::FETCH_ASSOC);
-            echo "Number of records found: " . count($results) . "<br>";
+        if ($user_id !== null) {
+            $stmt = $connect->prepare("SELECT * FROM karbohidrat_data WHERE user_id = :user_id ORDER BY id DESC");
+            $stmt->bindParam(':user_id', $user_id);
+            if ($stmt->execute()) {
+                $results = $stmt->fetchAll(PDO::FETCH_ASSOC);
 
-            if ($results) {
-                $no = 1;
-                foreach ($results as $row) {
-                    echo "<tr>";
-                    echo "<td>" . $no++ . "</td>";
-                    echo "<td>" . $row['nama'] . "</td>";
-                    echo "<td>" . $row['kondisi'] . "</td>";
-                    echo "<td>" . $row['umur'] . "</td>";
-                    echo "<td>" . $row['berat_badan'] . "</td>";
-                    echo "<td>" . $row['berat_bayi'] . "</td>";
-                    echo "<td>" . $row['riwayat_diabetes'] . "</td>";
-                    echo "<td>" . $row['karbo_dalam_kemasan'] . "</td>";
-                    echo "<td>" . $row['karbo_persen'] . "%</td>";
-                    echo "<td>" . $row['tanggal'] . "</td>"; // Ubah dari 'waktu' ke 'tanggal'
-                    echo "</tr>";
+                if ($results) {
+                    $no = 1;
+                    foreach ($results as $row) {
+                        echo "<tr>";
+                        echo "<td>" . $no++ . "</td>";
+                        echo "<td>" . $row['nama'] . "</td>";
+                        echo "<td>" . $row['kondisi'] . "</td>";
+                        echo "<td>" . $row['umur'] . "</td>";
+                        echo "<td>" . $row['berat_badan'] . "</td>";
+                        echo "<td>" . $row['berat_bayi'] . "</td>";
+                        echo "<td>" . $row['riwayat_diabetes'] . "</td>";
+                        echo "<td>" . $row['karbo_dalam_kemasan'] . "</td>";
+                        echo "<td>" . $row['karbo_persen'] . "%</td>";
+                        echo "<td>" . $row['tanggal'] . "</td>";
+                        echo "<td><button class='btn btn-warning' onclick='editData(" . json_encode($row) . ")'>Edit</button></td>";
+                        echo "</tr>";
+                    }
+                } else {
+                    echo "<tr><td colspan='11' class='text-center'>Belum ada riwayat perhitungan</td></tr>";
                 }
             } else {
-                echo "<tr><td colspan='10' class='text-center'>Belum ada riwayat perhitungan</td></tr>";
+                echo "Error executing query.";
             }
         } else {
-            echo "Error executing query.";
+            echo "<tr><td colspan='11' class='text-center'>Anda belum login.</td></tr>";
         }
-    } else {
-        echo "<tr><td colspan='8' class='text-center'>Anda belum login.</td></tr>";
-    }
-    ?>
-        </tbody>
+        ?>
+    </tbody>
     </table>
 </div>
 
@@ -203,5 +204,34 @@ function toggleFormFields() {
         babyWeightDiv.style.display = 'none';
         diabetesHistoryDiv.style.display = 'none';
     }
+}
+</script>
+
+<script>
+function editData(rowData) {
+    document.getElementById('condition').value = rowData.kondisi;
+    document.getElementById('age').value = rowData.umur;
+    document.getElementById('weight').value = rowData.berat_badan;
+    document.getElementById('carbo').value = rowData.karbo_dalam_kemasan;
+    
+    // Display condition-specific fields if needed
+    toggleFormFields();
+    
+    // Set additional fields based on condition
+    if (rowData.kondisi === 'hamil') {
+        document.getElementById('diabetes_history').value = rowData.riwayat_diabetes;
+    } else if (rowData.kondisi === 'menyusui') {
+        document.getElementById('baby_weight').value = rowData.berat_bayi;
+    }
+
+    // Add a hidden input for the record ID to identify the row for update
+    if (!document.getElementById('record_id')) {
+        const input = document.createElement('input');
+        input.type = 'hidden';
+        input.name = 'record_id';
+        input.id = 'record_id';
+        document.querySelector('form').appendChild(input);
+    }
+    document.getElementById('record_id').value = rowData.id;
 }
 </script>
