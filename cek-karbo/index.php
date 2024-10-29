@@ -79,8 +79,8 @@ $user_id = isset($_SESSION['user_id']) ? $_SESSION['user_id'] : null;
             <label for="condition" class="form-label">Kondisi Ibu</label>
             <select class="form-control" id="condition" name="condition" required onchange="toggleFormFields()">
                 <option value="">Pilih Kondisi</option>
-                <option value="hamil">Hamil</option>
-                <option value="menyusui">Menyusui</option>
+                <option value="ibu hamil">Hamil</option>
+                <option value="ibu menyusui">Menyusui</option>
             </select>
         </div>
         <div class="mb-3">
@@ -198,10 +198,10 @@ function toggleFormFields() {
     var babyWeightDiv = document.getElementById('baby_weight_div');
     var diabetesHistoryDiv = document.getElementById('diabetes_history_div');
 
-    if (condition === 'menyusui') {
+    if (condition === 'ibu menyusui') {
         babyWeightDiv.style.display = 'block';
         diabetesHistoryDiv.style.display = 'none';
-    } else if (condition === 'hamil') {
+    } else if (condition === 'ibu hamil') {
         babyWeightDiv.style.display = 'none';
         diabetesHistoryDiv.style.display = 'block';
     } else {
@@ -222,9 +222,9 @@ function editData(rowData) {
     toggleFormFields();
     
     // Set additional fields based on condition
-    if (rowData.kondisi === 'hamil') {
+    if (rowData.kondisi === 'ibu hamil') {
         document.getElementById('diabetes_history').value = rowData.riwayat_diabetes;
-    } else if (rowData.kondisi === 'menyusui') {
+    } else if (rowData.kondisi === 'ibu menyusui') {
         document.getElementById('baby_weight').value = rowData.berat_bayi;
     }
 

@@ -83,9 +83,9 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
         exit;
     }
     // Sesuaikan kebutuhan karbohidrat berdasarkan kondisi ibu
-    if ($condition == 'hamil') {
+    if ($condition == 'ibu hamil') {
         $karbo_max = 345; // Kebutuhan karbo untuk ibu hamil
-    } elseif ($condition == 'menyusui') {
+    } elseif ($condition == 'ibu menyusui') {
         $karbo_max = 360; // Kebutuhan karbo untuk ibu menyusui
     } else {
         $karbo_max = 360; // Default
@@ -101,7 +101,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     $risiko = "";
     $peringatan = "";
 
-    if ($condition == 'hamil') {
+    if ($condition == 'ibu hamil') {
         if ($age < 25 && $diabetes_history == 'ya') {
             $risiko = "Resiko Tinggi";
             $peringatan = "Karena usia Anda di bawah 25 tahun dan memiliki riwayat keluarga diabetes melitus, Anda termasuk dalam kategori risiko tinggi untuk diabetes. Untuk mencegah risiko ini, harap batasi konsumsi karbohidrat Anda.";
@@ -115,7 +115,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
             $risiko = "Resiko Tinggi";
             $peringatan = "Karena usia Anda di atas 30 tahun, Anda termasuk dalam kategori risiko tinggi untuk diabetes.";
         }
-    } elseif ($condition == 'menyusui') {
+    } elseif ($condition == 'ibu menyusui') {
         if ($age >= 30 && $baby_weight >= 4) {
             $risiko = "Resiko Tinggi";
             $peringatan = "Karena usia Anda di atas 30 tahun dan melahirkan bayi dengan berat badan 4kg atau lebih, Anda termasuk dalam kategori risiko tinggi untuk diabetes.";
@@ -181,12 +181,12 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
                 <p><strong>Berat Badan:</strong> $weight kg</p>";
 
     // Jika kondisi hamil, tampilkan riwayat diabetes
-    if ($condition == 'hamil') {
+    if ($condition == 'ibu hamil') {
         echo "<p><strong>Riwayat Diabetes:</strong> $diabetes_history</p>";
     }
 
     // Jika kondisi menyusui, tampilkan berat bayi
-    if ($condition == 'menyusui') {
+    if ($condition == 'ibu menyusui') {
         echo "<p><strong>Berat Bayi Baru Lahir:</strong> $baby_weight kg</p>";
     }
 
